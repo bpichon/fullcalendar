@@ -2238,6 +2238,8 @@ function getSkinCss(event, opt) {
 					gradientString += ((i < backgroundColor.length-1) ? ',' : ');');
 				}
 				statements.push('background:' + gradientString);
+				statements.push('text-shadow: -1px -1px 0 #333, 1px -1px 0 #333,'+
+					'-1px 1px 0 #333, 1px 1px 0 #333;');
 			}
 		} else {
 			statements.push('background-color:' + backgroundColor);
