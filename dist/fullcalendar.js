@@ -2225,10 +2225,28 @@ function getSkinCss(event, opt) {
 		opt('eventTextColor');
 	var statements = [];
 	if (backgroundColor) {
-		statements.push('background-color:' + backgroundColor);
+		if($.isArray(backgroundColor)) {
+			if(backgroundColor.length > 0) {
+				var gradientString = 'repeating-linear-gradient(45deg,';
+				for(var i = 0; i < backgroundColor.length; i++) {
+					gradientString += '' +
+						backgroundColor[i] +
+						' '+ i*10 + 'px, ' +
+						backgroundColor[i] +
+						' ' + (i+1)*10 + 'px';
+
+					gradientString += ((i < backgroundColor.length-1) ? ',' : ');');
+				}
+				statements.push('background:' + gradientString);
+			}
+		} else {
+			statements.push('background-color:' + backgroundColor);
+		}
 	}
 	if (borderColor) {
-		statements.push('border-color:' + borderColor);
+		if(!$.isArray(backgroundColor)) {
+			statements.push('border-color:' + borderColor);
+		}
 	}
 	if (textColor) {
 		statements.push('color:' + textColor);
